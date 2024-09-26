@@ -1,0 +1,4 @@
+/.env
+/wordpress/*
+!/wordpress/.gitkeep
+/.vscode/launch.json

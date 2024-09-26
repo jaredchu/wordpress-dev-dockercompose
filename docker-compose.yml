@@ -1,0 +1,61 @@
+services:
+
+  mysql_service:
+    image: ${MYSQL_IMAGE}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: wpdb
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - default-network
+
+  wordpress_service:
+    depends_on:
+      - mysql_service
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        WORDPRESS_IMAGE: ${WORDPRESS_IMAGE}
+        PHP_XDEBUG_BRANCH: ${PHP_XDEBUG_BRANCH}
+    image: wordpress_dev-image
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ./config/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ${WORK_DIR}:/var/www/html
+    environment:
+      WORDPRESS_DB_NAME: wpdb
+      WORDPRESS_DB_HOST: mysql_service:3306
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      APACHE_RUN_USER: www
+      APACHE_RUN_GROUP: www
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - default-network
+
+  phpmyadmin_service:
+    depends_on:
+      - mysql_service
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mysql_service
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      UPLOAD_LIMIT: 1G
+    networks:
+      - default-network
+
+networks:
+  default-network:
+
+volumes:
+  mysql_data:
