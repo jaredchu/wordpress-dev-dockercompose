@@ -29,3 +29,5 @@ RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
 RUN chown -R www:www /var/www/html
+
+RUN mkdir /tmp/xoutput && chmod 777 /tmp/xoutput/

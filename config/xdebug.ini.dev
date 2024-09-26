@@ -1,8 +1,12 @@
+#Ref https://xdebug.org/docs/all_settings
+
+# off, develop, coverage, debug, gcstats, profile, trace
 zend_extension=xdebug.so
-xdebug.mode=debug
+xdebug.mode=off
 xdebug.start_with_request=yes
 
 xdebug.client_host=host.docker.internal
 xdebug.client_port=9003
 xdebug.idekey=VSCODE
 xdebug.log=/tmp/xdebug.log
+xdebug.output_dir=/tmp/xoutput/
