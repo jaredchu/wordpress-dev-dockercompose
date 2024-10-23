@@ -1,3 +1,5 @@
+name: ${PROJECT_NAME}
+
 services:
 
   mysql_service:
