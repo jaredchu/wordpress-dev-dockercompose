@@ -9,16 +9,17 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends ssl-cert
 RUN a2enmod ssl && a2ensite default-ssl
 
-RUN apt-get -y install git
+RUN apt-get -y install git unzip
+COPY libs/xdebug.zip /tmp/xdebug.zip
 RUN cd /tmp && \
-    git clone https://github.com/xdebug/xdebug.git && \
+    unzip xdebug.zip && \
     cd xdebug && \
     git checkout $PHP_XDEBUG_BRANCH && \
     phpize && \
     ./configure --enable-xdebug && \
     make && \
     make install && \
-    rm -rf /tmp/xdebug
+    rm -rf /tmp/xdebug /tmp/xdebug.zip
 RUN docker-php-ext-enable xdebug
 
 RUN rm -r /var/lib/apt/lists/*
