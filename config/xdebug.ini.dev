@@ -1,8 +1,10 @@
 #Ref https://xdebug.org/docs/all_settings
 
+# uncomment to enable xdebug
+#zend_extension=xdebug.so
+
 # off, develop, coverage, debug, gcstats, profile, trace
-zend_extension=xdebug.so
-xdebug.mode=off
+xdebug.mode=develop
 xdebug.start_with_request=yes
 
 xdebug.client_host=host.docker.internal

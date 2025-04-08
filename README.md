@@ -11,6 +11,9 @@ A development Docker environment for WordPress with Xdebug integration for debug
 - SSL support
 - Persistent MySQL data
 - Volume mounting for live code updates
+- Content seeding with fake posts
+- WordPress installation script
+- Environment reset capability
 
 ## Prerequisites 📋
 
@@ -37,9 +40,19 @@ cp ./config/xdebug.ini.dev ./config/xdebug.ini
 docker-compose up -d
 ```
 
-4. Access your WordPress site at:
+4. Install WordPress:
+```bash
+./scripts/install.sh
+```
+
+5. Access your WordPress site at:
 - WordPress: https://localhost
 - phpMyAdmin: https://localhost:8080
+
+6. (Optional) Seed the database with fake content:
+```bash
+./scripts/seed.sh
+```
 
 ## Available Services 🌐
 
@@ -53,6 +66,8 @@ docker-compose up -d
 1. **Code Changes**: Edit files in the `wordpress` directory
 2. **Database Access**: Use phpMyAdmin at port 8080
 3. **Debugging**: Configure your IDE to use Xdebug (port 9003)
+4. **Content Seeding**: Use `./scripts/seed.sh` to generate fake posts
+5. **Environment Reset**: Use `./scripts/reset.sh` to start fresh
 
 ## Environment Variables 🔧
 
@@ -90,6 +105,11 @@ Key variables in `.env`:
    - Check MySQL service is running
    - Verify credentials in .env
    - Ensure ports are not blocked
+
+4. **Reset environment**:
+   ```bash
+   ./scripts/reset.sh
+   ```
 
 ## Contributing 🤝
 

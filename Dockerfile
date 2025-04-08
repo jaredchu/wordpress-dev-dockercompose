@@ -22,6 +22,10 @@ RUN cd /tmp && \
     rm -rf /tmp/xdebug /tmp/xdebug.zip
 RUN docker-php-ext-enable xdebug
 
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && \
+    mv wp-cli.phar /usr/local/bin/wp
+
 RUN rm -r /var/lib/apt/lists/*
 
 WORKDIR /var/www/html
