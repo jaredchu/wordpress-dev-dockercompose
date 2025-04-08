@@ -14,6 +14,7 @@ A development Docker environment for WordPress with Xdebug integration for debug
 - Content seeding with fake posts
 - WordPress installation script
 - Environment reset capability
+- Development directory structure
 
 ## Prerequisites 📋
 
@@ -68,6 +69,22 @@ docker-compose up -d
 3. **Debugging**: Configure your IDE to use Xdebug (port 9003)
 4. **Content Seeding**: Use `./scripts/seed.sh` to generate fake posts
 5. **Environment Reset**: Use `./scripts/reset.sh` to start fresh
+
+### Development Directory Structure 📁
+
+⚠️ **IMPORTANT**: Always store your development code in the `dev/` directory. Any code stored inside `wordpress/` directory will be removed when running `reset.sh`.
+
+```
+.
+├── dev/             # Development directory (SAFE - preserved on reset)
+│   ├── plugins/     # Development plugins
+│   └── themes/      # Development themes
+└── wordpress/       # WordPress installation (WILL BE RESET)
+```
+
+Directory purposes:
+- `dev/`: Contains development files that are NOT part of the WordPress installation. This is the ONLY safe place for your code.
+- `wordpress/`: Contains a fresh WordPress installation that can be reset anytime. Do not store development files here.
 
 ## Environment Variables 🔧
 

@@ -29,7 +29,9 @@ services:
     volumes:
       - ./config/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - ./config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
-      - ${WORK_DIR}:/var/www/html
+      - ${WP_DIR}:/var/www/html
+      - ${DEV_DIR}/plugins:/var/www/html/wp-content/plugins
+      - ${DEV_DIR}/themes:/var/www/html/wp-content/themes
     environment:
       WORDPRESS_DB_NAME: wpdb
       WORDPRESS_DB_HOST: mysql_service:3306

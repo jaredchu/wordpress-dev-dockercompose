@@ -1,6 +1,9 @@
 /.env
 /config/xdebug.ini
+/.vscode/launch.json
 
 /wordpress/*
 !/wordpress/.gitkeep
-/.vscode/launch.json
+/dev/*
+!/dev/plugins/.gitkeep
+!/dev/themes/.gitkeep
